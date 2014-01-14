@@ -18,6 +18,7 @@ class Foreman::Export::Upstart < Foreman::Export::Base
 
       1.upto(engine.formation[name]) do |num|
         port = engine.port_for(process, num)
+        ps = engine.name_for_index(process, num)
         write_template "upstart/process.conf.erb", "#{app}-#{name}-#{num}.conf", binding
       end
     end

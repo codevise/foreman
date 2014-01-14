@@ -278,6 +278,12 @@ class Foreman::Engine
     env
   end
 
+  # Get a unique name for an instance of a process
+  def name_for_index(process, index)
+    [ @names[process], index.to_s ].compact.join(".")
+  end
+
+
 private
 
 ### Engine API ######################################################
@@ -303,10 +309,6 @@ private
   def name_for(pid)
     process, index = @running[pid]
     name_for_index(process, index)
-  end
-
-  def name_for_index(process, index)
-    [ @names[process], index.to_s ].compact.join(".")
   end
 
   def parse_formation(formation)
